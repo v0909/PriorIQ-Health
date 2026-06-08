@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PriorIQ Health — Business Case</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #0891b2;
+    --cyan-light: #e0f7fa;
+    --green: #10b981;
+    --blue: #2563eb;
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --ink-3: #64748b;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: rgba(15,23,42,.1);
+    --radius: 14px;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page { max-width: 980px; margin: 0 auto; padding: 56px 48px 80px; }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #0e7490 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 72px 64px 56px;
+    margin-bottom: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,.18) 0%, transparent 70%);
+    top: -200px; right: -200px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: 3.6rem;
+    line-height: .95;
+    background: linear-gradient(135deg, #ffffff, #67e8f9, #34d399);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 18px;
+  }
+  .cover-tagline {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: rgba(255,255,255,.82);
+    margin-bottom: 36px;
+    max-width: 580px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,.15);
+    padding-top: 28px;
+    margin-top: 28px;
+  }
+  .cover-meta-item label {
+    display: block;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item span {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .cover-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .cover-tag {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: .78rem;
+    font-weight: 600;
+    color: rgba(255,255,255,.85);
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section {
+    margin-bottom: 52px;
+  }
+  .section-label {
+    display: inline-block;
+    background: var(--cyan-light);
+    color: var(--cyan);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-family: var(--font-display);
+    font-size: 1.95rem;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section > p, .section > .body-text {
+    font-size: 1rem;
+    color: var(--ink-2);
+    margin-bottom: 18px;
+    max-width: 820px;
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; gap: 18px; }
+  .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 4px 18px rgba(15,23,42,.06);
+  }
+  .card-accent {
+    border-left: 4px solid var(--cyan);
+  }
+  .card-highlight {
+    border: 2px solid rgba(8,145,178,.22);
+    background: linear-gradient(135deg, #f0fdff 0%, #ecfdf5 100%);
+  }
+  .card-dark {
+    background: var(--ink);
+    color: white;
+    border: none;
+  }
+  .card-dark .card-label { color: rgba(255,255,255,.55); }
+  .card-dark .metric { color: white; }
+  .card-dark p { color: rgba(255,255,255,.75); }
+
+  .card-label {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 8px;
+  }
+  .metric {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .metric-sm { font-size: 1.6rem; }
+  .card p { font-size: .9rem; color: var(--ink-3); margin-top: 8px; line-height: 1.45; }
+  .card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+    padding: 4px 0 16px;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1;
+    min-width: 140px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .flow-step + .flow-step::before {
+    content: '→';
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+  .flow-step .num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--cyan);
+    color: white;
+    font-size: .8rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+  }
+  .flow-step h5 { font-size: .9rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .flow-step p { font-size: .75rem; color: var(--ink-3); margin: 0; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  thead tr { background: var(--ink); color: white; }
+  thead th { padding: 12px 16px; text-align: left; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: rgba(15,23,42,.026); }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--ink-2); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  .yes { color: var(--green); font-weight: 700; }
+  .limited { color: #f59e0b; font-weight: 700; }
+  .no { color: #ef4444; font-weight: 700; }
+  table.rounded { border-radius: 12px; overflow: hidden; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--cyan), var(--green)); border-radius: 99px; }
+  .tl-item { position: relative; margin-bottom: 24px; }
+  .tl-dot { position: absolute; left: -28px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--cyan); border: 3px solid white; box-shadow: 0 0 0 2px var(--cyan); }
+  .tl-item h4 { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .tl-item .tl-date { font-size: .78rem; font-weight: 700; color: var(--cyan); margin-bottom: 4px; }
+  .tl-item p { font-size: .88rem; color: var(--ink-2); }
+
+  /* ── FUNNEL ── */
+  .funnel { display: grid; gap: 6px; }
+  .funnel-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .funnel-bar-wrap { flex: 1; }
+  .funnel-bar {
+    height: 42px;
+    border-radius: 8px;
+    display: flex; align-items: center; padding: 0 18px;
+    color: white;
+    font-weight: 700;
+    font-size: .95rem;
+  }
+  .funnel-label { font-size: .85rem; color: var(--ink-3); min-width: 120px; text-align: right; }
+
+  /* ── MILESTONE CHECKLIST ── */
+  .checklist { list-style: none; display: grid; gap: 12px; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+  }
+  .check-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .checklist li h5 { font-size: .95rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .checklist li p { font-size: .83rem; color: var(--ink-3); margin: 0; }
+
+  /* ── RISK MATRIX ── */
+  .risk-high { background: rgba(239,68,68,.1); border-left: 4px solid #ef4444; }
+  .risk-medium { background: rgba(245,158,11,.08); border-left: 4px solid #f59e0b; }
+  .risk-low { background: rgba(16,185,129,.07); border-left: 4px solid var(--green); }
+  .risk-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .badge-red { background: #fef2f2; color: #dc2626; }
+  .badge-amber { background: #fffbeb; color: #b45309; }
+  .badge-green { background: #f0fdf4; color: #15803d; }
+
+  /* ── USE OF FUNDS ── */
+  .fund-bar { display: flex; height: 38px; border-radius: 10px; overflow: hidden; margin: 18px 0 10px; }
+  .fund-segment { display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; color: white; transition: all .3s; }
+  .fund-legend { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fund-legend-item { display: flex; align-items: center; gap: 7px; font-size: .82rem; color: var(--ink-2); }
+  .fund-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  /* ── LINE CHART ── */
+  .chart-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+
+  /* ── BLOCKQUOTE ── */
+  .insight {
+    background: linear-gradient(135deg, #f0fdff, #f0fff4);
+    border-left: 4px solid var(--cyan);
+    border-radius: 0 12px 12px 0;
+    padding: 18px 24px;
+    margin: 22px 0;
+    font-size: .98rem;
+    color: var(--ink-2);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 72px;
+    padding-top: 28px;
+    font-size: .8rem;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .page { padding: 32px 36px; }
+    .cover { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    body { background: white; }
+    .cover { border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════════════ COVER ══════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Confidential — Seed Stage Business Case</div>
+  <h1>PriorIQ Health</h1>
+  <p class="cover-tagline">The AI-Native Payer Intelligence Network for Specialty Care. Reducing denials. Accelerating treatment. Building the operating system for healthcare approvals.</p>
+  <div class="cover-tags">
+    <span class="cover-tag">Rheumatology First</span>
+    <span class="cover-tag">CMS FHIR Tailwind</span>
+    <span class="cover-tag">AI-Native Workflow</span>
+    <span class="cover-tag">HIPAA-Compliant Infrastructure</span>
+    <span class="cover-tag">Proprietary Outcome Network</span>
+  </div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Stage</label>
+      <span>Seed Round</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Raise</label>
+      <span>$2–4M</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Post-money (target)</label>
+      <span>$10–15M</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Version</label>
+      <span>June 2026 · v1.0</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Status</label>
+      <span>For Investor Review</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 1. EXECUTIVE SUMMARY ══════════════════════ -->
+<div class="section">
+  <div class="section-label">01 — Executive Summary</div>
+  <h2>The $13B Administrative Crisis Nobody Has Solved</h2>
+  <p>Prior authorization (PA) is the single most disruptive administrative bottleneck in U.S. specialty healthcare. Physicians spend an average of 13 hours per week managing authorizations — time that should be spent treating patients. The U.S. healthcare system burns an estimated $13B annually on administrative overhead, and 94% of physicians report that PA directly delays patient care. Despite decades of digitization efforts, the core decision-making problem remains entirely manual.</p>
+  <p>PriorIQ Health is building the intelligence layer between providers and payers. We automate the four manual steps of every prior authorization — requirement determination, clinical documentation extraction, submission, and denial appeal — using an AI-native platform purpose-built for specialty care. Our starting market is independent rheumatology practices, where 100% of biologic therapies require authorization, denial rates exceed 20%, and therapy values reach $80K per year per patient.</p>
+  <p>The timing is not coincidental. CMS finalized a mandate (CMS-0057-F) requiring all major payers to expose standardized FHIR prior authorization APIs by January 2027. This creates a forcing function that has never existed before. Combined with enterprise-grade clinical AI now available, labor shortages, margin compression, and the highest physician burnout rates on record, the conditions for a category-defining company are present today.</p>
+
+  <div class="insight">"PriorIQ is not another workflow tool. It is the intelligence layer — using every outcome to make the next authorization smarter, faster, and more likely to succeed."</div>
+
+  <div class="card-grid card-grid-4" style="margin-top: 28px;">
+    <div class="card card-accent">
+      <div class="card-label">Annual Admin Cost</div>
+      <div class="metric">$13B</div>
+      <p>U.S. prior authorization administrative overhead annually</p>
+    </div>
+    <div class="card card-accent">
+      <div class="card-label">Physician Burden</div>
+      <div class="metric">13h</div>
+      <p>Average hours per physician per week lost to prior auth</p>
+    </div>
+    <div class="card card-accent">
+      <div class="card-label">Care Delays</div>
+      <div class="metric">94%</div>
+      <p>Physicians who report PA delays patient access to care (AMA 2024)</p>
+    </div>
+    <div class="card card-dark">
+      <div class="card-label">Seed Round</div>
+      <div class="metric">$2–4M</div>
+      <p>Targeting close by Month 14; $10–15M post-money valuation</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 2. PROBLEM ══════════════════════ -->
+<div class="section">
+  <div class="section-label">02 — The Problem</div>
+  <h2>Four Manual Steps. Every Time. For Two Decades.</h2>
+  <p>The prior authorization workflow has remained functionally unchanged since the late 1990s. Technology has digitized forms and routed messages — but has never solved the underlying decision-making problem. Staff at every specialty practice still execute the same four steps for every single authorization, consuming 45–90 minutes of skilled clinical administrative time per authorization.</p>
+
+  <div class="flow" style="gap: 18px; margin: 28px 0;">
+    <div class="flow-step">
+      <div class="num">1</div>
+      <h5>Determine Requirements</h5>
+      <p>Identify payer-specific rules, formulary tiers, step therapy, and required documentation per drug and indication</p>
+    </div>
+    <div class="flow-step">
+      <div class="num">2</div>
+      <h5>Collect Evidence</h5>
+      <p>Pull chart notes, labs, diagnosis history, prior treatment failures, and disease activity scores from the EHR</p>
+    </div>
+    <div class="flow-step">
+      <div class="num">3</div>
+      <h5>Complete Submission</h5>
+      <p>Fill payer-specific forms, attach clinical evidence, and route through portal workflows — manually, every time</p>
+    </div>
+    <div class="flow-step">
+      <div class="num">4</div>
+      <h5>Appeal Denial</h5>
+      <p>Interpret denial reason codes, reconstruct the case, and submit peer-to-peer review requests or formal appeals</p>
+    </div>
+  </div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-label">Volume</div>
+      <div class="metric metric-sm">39</div>
+      <h4>Authorizations per physician per week</h4>
+      <p>Every one requiring its own payer-specific documentation and submission workflow</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Time Lost</div>
+      <div class="metric metric-sm">45–90 min</div>
+      <h4>Manual effort per authorization</h4>
+      <p>Equivalent to 1–2 full patient visits consumed by paperwork for a single biologic prescription</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Patient Impact</div>
+      <div class="metric metric-sm">94%</div>
+      <h4>Physicians report care delays</h4>
+      <p>AMA 2024 survey. Biologic treatment delays in rheumatology cause measurable disease progression and hospitalization</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 3. WHY NOW ══════════════════════ -->
+<div class="section">
+  <div class="section-label">03 — Market Timing</div>
+  <h2>Why This Company Could Not Have Existed Three Years Ago</h2>
+  <p>Three structural shifts converge in 2026 to create a narrow and highly favorable window. All three are independently powerful; together they are category-defining.</p>
+
+  <div class="timeline" style="margin-top: 28px;">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2024</div>
+      <h4>Enterprise-Grade Clinical AI Becomes Available</h4>
+      <p>Large language models reach clinical-grade extraction accuracy for structured medical records, lab values, and ICD/CPT coding — making AI-assisted PA feasible for the first time at production scale. Claude Sonnet-class models process clinical documents with ≥95% structured field accuracy at ~$0.015 per PA document.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">January 2026</div>
+      <h4>CMS-0057-F Core Provisions Go Live</h4>
+      <p>CMS's Interoperability and Prior Authorization Final Rule activates key payer obligations: faster decision timelines, mandatory denial reasons with specific criteria, and the start of the transition to structured electronic prior authorization workflows. Every major commercial insurer is now legally required to accelerate and justify decisions.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">January 2027</div>
+      <h4>FHIR Da Vinci APIs Mandated for Prior Authorization</h4>
+      <p>CMS requires major payers to expose standardized FHIR-based Prior Authorization APIs (CRD, DTR, PAS). This creates machine-readable payer criteria, structured denial data, and programmatic submission infrastructure — the exact data layer PriorIQ is building its intelligence network on top of.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026–2028+</div>
+      <h4>Accelerating Tailwinds: Labor, Margin, Burnout</h4>
+      <p>Administrative staff shortages are forcing practices to reduce headcount. Margin compression from payer rate cuts makes automation ROI immediate. AMA surveys show physician PA burden at all-time highs. The incentive to adopt a system that provably reduces PA time by 50%+ has never been stronger.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 4. MARKET OPPORTUNITY ══════════════════════ -->
+<div class="section">
+  <div class="section-label">04 — Market Opportunity</div>
+  <h2>A $50B+ Market Accessed Through a Precision Beachhead</h2>
+  <p>Large companies win by dominating one segment before expanding. PriorIQ intentionally begins narrow, where pain is most concentrated and product-market fit is fastest to achieve, then expands systematically across specialties and into enterprise health systems.</p>
+
+  <div class="funnel" style="margin: 28px 0;">
+    <div class="funnel-row">
+      <div class="funnel-label">TAM</div>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="background: linear-gradient(90deg,#0891b2,#0e7490); width: 100%;">Healthcare Admin Automation &nbsp;·&nbsp; $50B+</div>
+      </div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-label">SAM</div>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="background: linear-gradient(90deg,#0d9488,#0891b2); width: 70%;">Prior Authorization Technology &nbsp;·&nbsp; $11B+</div>
+      </div>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-label">SOM</div>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="background: linear-gradient(90deg,#10b981,#0d9488); width: 35%;">Independent Specialty Practices &nbsp;·&nbsp; $1B+</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:.82rem; color: var(--ink-3);">Market size figures are management estimates. External diligence should validate final sizing.</p>
+
+  <h3 style="font-size:1.2rem; font-weight:700; margin: 32px 0 14px;">Why Rheumatology as the Beachhead</h3>
+  <p>Rheumatology has the highest concentration of PA pain in U.S. specialty medicine. Every biologic therapy requires authorization. Practices process 150–200 authorizations per month. Denial rates exceed 20%. Therapy values reach $20K–80K per patient annually — meaning a single prevented denial can pay for an annual software subscription.</p>
+
+  <div class="card-grid card-grid-4" style="margin-top: 18px;">
+    <div class="card">
+      <div class="card-label">Authorization Rate</div>
+      <div class="metric">100%</div>
+      <p>Biologics require prior auth — no exceptions across major payers</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Volume</div>
+      <div class="metric">150–200</div>
+      <p>Prior authorizations per practice per month — a dense, repeatable workflow</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Denial Rate</div>
+      <div class="metric">20%+</div>
+      <p>First-pass denial rate for biologic PAs, generating costly appeal cycles</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Therapy Value</div>
+      <div class="metric">$80K</div>
+      <p>Annual per-patient therapy value — making every denial economically significant</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 5. PRODUCT ══════════════════════ -->
+<div class="section">
+  <div class="section-label">05 — Product</div>
+  <h2>Three Layers. Each One Compounds the Last.</h2>
+  <p>PriorIQ is built as a three-layer architecture where every interaction generates data and every outcome improves future decisions. The initial product delivers immediate workflow ROI. The data network is the durable moat.</p>
+
+  <div class="card-grid card-grid-3" style="margin-top: 24px;">
+    <div class="card">
+      <div class="card-label">Layer 1</div>
+      <h4>Authorization Copilot</h4>
+      <p>AI reads EHR documents, extracts 20–35 required clinical fields per authorization (diagnosis codes, disease activity scores, prior treatment failures, lab values), matches to payer criteria, and scores approval probability. Staff review and submit in under 5 minutes.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer 2</div>
+      <h4>Denial Prediction Engine</h4>
+      <p>Trained on historical authorization outcomes across payers, drugs, and indications. Flags likely denial reasons before submission. Recommends additional clinical evidence that shifts the approval probability. Gets smarter with every processed PA.</p>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-label">Layer 3 — The Moat</div>
+      <h4>Appeal Intelligence</h4>
+      <p>Transforms denial reason codes into optimized appeal packages using historical appeal success patterns. Tracks peer-to-peer review outcomes. Creates a longitudinal learning loop that competitors cannot replicate without years of outcome data.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.2rem; font-weight:700; margin: 32px 0 14px;">Technical Architecture</h3>
+  <p>The POC phase deploys a three-layer stack: secure HIPAA-compliant document ingestion (AWS + KMS + BAAs with Anthropic, Supabase, Twilio), an AI extraction engine using Claude API with RAG over a structured payer criteria knowledge base (50+ payer × drug × indication combinations), and a Playwright-based browser automation layer covering 3 major payer portals. Full FHIR Da Vinci API integration (CRD, DTR, PAS) replaces browser automation in Months 8–14, timed to the January 2027 CMS mandate.</p>
+
+  <div class="card-grid card-grid-3" style="margin-top: 18px;">
+    <div class="card">
+      <div class="card-label">POC Target</div>
+      <div class="metric">&lt;8 min</div>
+      <p>Per authorization vs. 45–90 min manual baseline. Production target: &lt;5 minutes.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">AI Accuracy Target</div>
+      <div class="metric">≥85%</div>
+      <p>Field-fill accuracy at POC launch (100 hold-out test PAs). Production target: ≥95% by Month 6.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Denial Reduction</div>
+      <div class="metric">25%+</div>
+      <p>First-pass denial reduction target through approval probability scoring and evidence optimization.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 6. COMPETITIVE LANDSCAPE ══════════════════════ -->
+<div class="section">
+  <div class="section-label">06 — Competitive Position</div>
+  <h2>The Market Optimizes Processing. We Optimize Approvals.</h2>
+  <p>Existing vendors — Covermymeds, Surescripts, and EHR-embedded PA modules — solved the routing problem. They digitized forms and tracked submission status. PriorIQ solves the decision-making problem: predicting outcomes, recommending evidence, and learning from every result. This distinction is the foundation of the business.</p>
+
+  <div style="margin-top: 24px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);">
+    <table class="rounded">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Legacy Vendors</th>
+          <th>PriorIQ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Workflow Automation & Routing</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>AI Clinical Document Extraction</td><td class="limited">Limited</td><td class="yes">Yes — Claude API + RAG</td></tr>
+        <tr><td>Payer Criteria Knowledge Base</td><td class="limited">Generic</td><td class="yes">Specialty-specific, 50+ combinations</td></tr>
+        <tr><td>Denial Prediction Scoring</td><td class="no">No</td><td class="yes">Yes — core product layer</td></tr>
+        <tr><td>Appeal Intelligence</td><td class="no">No</td><td class="yes">Yes — outcome-trained</td></tr>
+        <tr><td>FHIR Da Vinci Integration</td><td class="limited">Partial / Planned</td><td class="yes">In roadmap (Months 8–14)</td></tr>
+        <tr><td>Specialty-First Positioning</td><td class="no">No — horizontal</td><td class="yes">Yes — rheumatology beachhead</td></tr>
+        <tr><td>Longitudinal Payer Intelligence Network</td><td class="no">No</td><td class="yes">Yes — built from Day 1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight" style="margin-top: 24px;">Competitors can copy the software. They cannot copy years of specialty-specific approval outcomes, denial patterns, and appeal success data — the proprietary network that makes PriorIQ's predictions more accurate over time.</div>
+</div>
+
+<!-- ══════════════════════ 7. BUSINESS MODEL ══════════════════════ -->
+<div class="section">
+  <div class="section-label">07 — Business Model</div>
+  <h2>Multiple Recurring Streams with Venture-Scale Expansion</h2>
+  <p>PriorIQ uses a tiered SaaS model designed for strong net revenue retention. The subscription creates predictable recurring revenue; transaction and appeal fees align incentives with value delivery; shared savings creates a future enterprise tier as outcomes data matures.</p>
+
+  <div class="card-grid card-grid-4" style="margin-top: 24px;">
+    <div class="card">
+      <div class="card-label">Subscription</div>
+      <div class="metric metric-sm">$500–750</div>
+      <h4>Per provider / month</h4>
+      <p>Core platform access. Pricing validated through 5+ willingness-to-pay interviews at $400–500/physician/month; upward revised for production tier.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Transaction Fee</div>
+      <div class="metric metric-sm">$2–5</div>
+      <h4>Per authorization</h4>
+      <p>Volume-based layer that scales directly with PA throughput. Aligns revenue with practice activity and usage intensity.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Appeal Automation</div>
+      <div class="metric metric-sm">$25–100</div>
+      <h4>Per appeal</h4>
+      <p>High-value module priced against appeal costs typically exceeding $100–200 in staff time and peer-to-peer coordination.</p>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-label">Future: Shared Savings</div>
+      <div class="metric metric-sm">10–20%</div>
+      <h4>Of recovered revenue</h4>
+      <p>Enterprise tier for health systems where PriorIQ takes a percentage of denial reversals and avoided administrative cost. Highest LTV tier.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.2rem; font-weight:700; margin: 32px 0 14px;">Customer ROI Model — Representative Practice</h3>
+
+  <div style="border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);">
+    <table>
+      <thead><tr><th>Metric</th><th>Current State</th><th>With PriorIQ</th><th>Delta</th></tr></thead>
+      <tbody>
+        <tr><td>Practice size</td><td>4 physicians</td><td>4 physicians</td><td>—</td></tr>
+        <tr><td>Monthly PA volume</td><td>180 authorizations</td><td>180 authorizations</td><td>—</td></tr>
+        <tr><td>Time per authorization</td><td>45–90 min</td><td>&lt;5 min</td><td>−90%+</td></tr>
+        <tr><td>Annual admin cost (staff time)</td><td>$36,000–60,000</td><td>~$7,200</td><td>−$30K–53K</td></tr>
+        <tr><td>Annual PriorIQ subscription</td><td>—</td><td>$21,600</td><td>Net cost</td></tr>
+        <tr><td><strong>Net annual savings</strong></td><td>—</td><td>—</td><td><strong>$15,000–40,000+</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.82rem; color: var(--ink-3); margin-top: 10px;">All figures are modeled projections based on practice volume, staffing time, and subscription pricing. One prevented biologic denial ($20K–80K therapy value) can pay for the annual subscription in a single transaction.</p>
+</div>
+
+<!-- ══════════════════════ 8. GO-TO-MARKET ══════════════════════ -->
+<div class="section">
+  <div class="section-label">08 — Go-to-Market</div>
+  <h2>Land Deep in One Specialty. Expand Systematically.</h2>
+  <p>The initial sales motion is focused, repeatable, and founder-led. Design partners provide product validation, referrals, and outcome data simultaneously. Channel partnerships and EHR integrations scale the motion beyond what direct sales can reach.</p>
+
+  <div class="card-grid card-grid-4" style="margin-top: 24px;">
+    <div class="card">
+      <div class="card-label">Phase 1 · Weeks 1–14</div>
+      <div class="metric metric-sm">10</div>
+      <h4>Design Partners</h4>
+      <p>3 signed LOIs by Week 4. Founder-led discovery and onboarding. Minimum $500 deposit or contract commitment to validate willingness-to-pay before build.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Phase 2 · Months 4–8</div>
+      <div class="metric metric-sm">100</div>
+      <h4>Paying Practices</h4>
+      <p>Direct sales to independent rheumatology practices (5–50 physicians). Target: $10K MRR by Month 8. Referral program from design partners.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Phase 3 · Months 8–14</div>
+      <div class="metric metric-sm">1,000</div>
+      <h4>Channel Expansion</h4>
+      <p>EHR marketplace listings, group purchasing organizations (GPOs), rheumatology specialty societies. Oncology beachhead launch at Month 12.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Phase 4 · Year 2+</div>
+      <div class="metric metric-sm">Enterprise</div>
+      <h4>Health Systems</h4>
+      <p>Multi-specialty enterprise deals with IDNs and ACOs. FHIR integration live. SOC 2 Type II certified. Canadian market readiness assessment complete.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 9. FINANCIALS ══════════════════════ -->
+<div class="section">
+  <div class="section-label">09 — Financial Projections</div>
+  <h2>90%+ Gross Margin SaaS with $120M+ ARR Potential</h2>
+  <p>The following ARR projections reflect an illustrative post-product-market-fit growth path. They are not a forecast backed by operating history and should be evaluated alongside the GTM assumptions and milestone triggers above.</p>
+
+  <div class="chart-wrap" style="margin: 24px 0;">
+    <svg viewBox="0 0 880 300" style="width:100%; height:300px; display:block;">
+      <!-- Grid lines -->
+      <line x1="80" y1="30" x2="80" y2="250" stroke="#e2e8f0" stroke-width="1.5"/>
+      <line x1="80" y1="250" x2="840" y2="250" stroke="#e2e8f0" stroke-width="1.5"/>
+      <line x1="80" y1="195" x2="840" y2="195" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="80" y1="140" x2="840" y2="140" stroke="#f1f5f9" stroke-width="1"/>
+      <line x1="80" y1="85" x2="840" y2="85" stroke="#f1f5f9" stroke-width="1"/>
+      <!-- Y-axis labels -->
+      <text x="68" y="254" text-anchor="end" fill="#94a3b8" font-size="13">$0</text>
+      <text x="68" y="199" text-anchor="end" fill="#94a3b8" font-size="13">$30M</text>
+      <text x="68" y="144" text-anchor="end" fill="#94a3b8" font-size="13">$60M</text>
+      <text x="68" y="89" text-anchor="end" fill="#94a3b8" font-size="13">$90M</text>
+      <text x="68" y="38" text-anchor="end" fill="#94a3b8" font-size="13">$120M</text>
+      <!-- Area fill: Y1=1.2M, Y2=5M, Y3=22M, Y4=60M, Y5=120M -->
+      <!-- Scaled: 120M = 220px height. 0 = y250. 120M = y30. Scale = 220/120M -->
+      <!-- Y1: 1.2M → 250-(1.2/120*220) = 247.8 → ~248 -->
+      <!-- Y2: 5M  → 250-(5/120*220)   = 240.8 → ~241 -->
+      <!-- Y3: 22M → 250-(22/120*220)  = 209.7 → ~210 -->
+      <!-- Y4: 60M → 250-(60/120*220)  = 140   → 140 -->
+      <!-- Y5: 120M→ 250-(120/120*220) = 30    → 30  -->
+      <!-- X: Y1=150, Y2=270, Y3=390, Y4=510, Y5=630 (even spacing within 150–630) -->
+      <!-- Actually evenly: 150, 270, 390, 510, 630 -->
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0891b2" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#0891b2" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+      <polygon points="150,248 270,241 390,210 510,140 630,30 630,250 150,250" fill="url(#areaGrad)"/>
+      <polyline points="150,248 270,241 390,210 510,140 630,30" fill="none" stroke="#0891b2" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Data points -->
+      <circle cx="150" cy="248" r="6" fill="#0891b2"/>
+      <circle cx="270" cy="241" r="6" fill="#0891b2"/>
+      <circle cx="390" cy="210" r="6" fill="#0891b2"/>
+      <circle cx="510" cy="140" r="6" fill="#0891b2"/>
+      <circle cx="630" cy="30" r="6" fill="#0891b2"/>
+      <!-- Value labels -->
+      <text x="150" y="238" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">$1.2M</text>
+      <text x="270" y="231" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">$5M</text>
+      <text x="390" y="200" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">$22M</text>
+      <text x="510" y="130" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">$60M</text>
+      <text x="630" y="22" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="700">$120M</text>
+      <!-- X-axis labels -->
+      <text x="150" y="272" text-anchor="middle" fill="#475569" font-size="14" font-weight="600">Year 1</text>
+      <text x="270" y="272" text-anchor="middle" fill="#475569" font-size="14" font-weight="600">Year 2</text>
+      <text x="390" y="272" text-anchor="middle" fill="#475569" font-size="14" font-weight="600">Year 3</text>
+      <text x="510" y="272" text-anchor="middle" fill="#475569" font-size="14" font-weight="600">Year 4</text>
+      <text x="630" y="272" text-anchor="middle" fill="#475569" font-size="14" font-weight="600">Year 5</text>
+      <text x="460" y="295" text-anchor="middle" fill="#94a3b8" font-size="12">Illustrative ARR growth path — post-product-market-fit scenario</text>
+    </svg>
+  </div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-label">Gross Margin</div>
+      <div class="metric">90%+</div>
+      <p>SaaS subscription model with minimal COGS at scale. Claude API costs ~$80/customer/month at steady-state rheumatology volume.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">POC Budget</div>
+      <div class="metric">~$60K</div>
+      <p>14-week POC phase total. Range $41K–$80K depending on whether CTO is co-founder (equity) or contractor (cash).</p>
+    </div>
+    <div class="card">
+      <div class="card-label">MRR Targets</div>
+      <div class="metric">$30K</div>
+      <p>Target at Month 18. Intermediate gates: $10K MRR by Month 8; $25–30K by Month 14 before seed close.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 10. THE ASK ══════════════════════ -->
+<div class="section">
+  <div class="section-label">10 — The Ask</div>
+  <h2>$2–4M Seed to Prove the Intelligence Network</h2>
+  <p>The seed round funds 14 months of operation: from signed design partner LOIs through SOC 2 Type II certification, FHIR integration, and the start of the oncology expansion. Every dollar is allocated toward the milestones that de-risk the Series A.</p>
+
+  <div class="fund-bar">
+    <div class="fund-segment" style="width:45%; background: #0891b2;">45%</div>
+    <div class="fund-segment" style="width:25%; background: #0d9488;">25%</div>
+    <div class="fund-segment" style="width:15%; background: #10b981;">15%</div>
+    <div class="fund-segment" style="width:10%; background: #2563eb;">10%</div>
+    <div class="fund-segment" style="width:5%; background: #7c3aed;">5%</div>
+  </div>
+  <div class="fund-legend">
+    <div class="fund-legend-item"><div class="fund-dot" style="background:#0891b2"></div>45% Product & Engineering</div>
+    <div class="fund-legend-item"><div class="fund-dot" style="background:#0d9488"></div>25% Go-to-Market & Sales</div>
+    <div class="fund-legend-item"><div class="fund-dot" style="background:#10b981"></div>15% Compliance (HIPAA, SOC 2)</div>
+    <div class="fund-legend-item"><div class="fund-dot" style="background:#2563eb"></div>10% AI Infrastructure</div>
+    <div class="fund-legend-item"><div class="fund-dot" style="background:#7c3aed"></div>5% Operations & Legal</div>
+  </div>
+
+  <h3 style="font-size:1.2rem; font-weight:700; margin: 32px 0 14px;">Milestones This Round Funds</h3>
+  <ul class="checklist">
+    <li>
+      <span class="check-icon">🎯</span>
+      <div><h5>30 Design Partners signed</h5><p>3 LOIs by Week 4. 10 paid design partners by Month 4. 30 total by Month 8. Each generates training data and referrals.</p></div>
+    </li>
+    <li>
+      <span class="check-icon">💳</span>
+      <div><h5>100 Paying Customers · $30K MRR</h5><p>Credit card charged, active on platform. Month 8 intermediate gate: $10K MRR. Month 14 seed close gate: $25–30K MRR.</p></div>
+    </li>
+    <li>
+      <span class="check-icon">🔌</span>
+      <div><h5>FHIR Da Vinci Integration Live</h5><p>CRD, DTR, PAS APIs integrated by Month 14 — timed to January 2027 CMS mandate. Replaces browser automation with standards-based submission.</p></div>
+    </li>
+    <li>
+      <span class="check-icon">🔒</span>
+      <div><h5>SOC 2 Type II Certified</h5><p>Certification by Month 14. Required for enterprise sales and a Series A pre-condition for most healthcare-focused VCs.</p></div>
+    </li>
+    <li>
+      <span class="check-icon">🏥</span>
+      <div><h5>Oncology Expansion Launched</h5><p>3 oncology design partner practices by Month 18. Second specialty validation expands SAM and demonstrates platform repeatability.</p></div>
+    </li>
+    <li>
+      <span class="check-icon">📈</span>
+      <div><h5>$1M+ ARR</h5><p>Annualized revenue run rate by end of seed round period. Establishes Series A eligibility at $10–15M ARR target with institutional healthcare VCs.</p></div>
+    </li>
+  </ul>
+</div>
+
+<!-- ══════════════════════ 11. RISK LANDSCAPE ══════════════════════ -->
+<div class="section">
+  <div class="section-label">11 — Risk Landscape</div>
+  <h2>Known Risks, Managed Deliberately</h2>
+  <p>PriorIQ operates with a live risk register reviewed at every sprint retrospective. The two existential risks at the POC stage are product-market validation (R-01) and AI accuracy (R-04). Both are managed through a deliberate sequencing rule: no build before LOIs are signed, and humans remain in the loop in v1 so that accuracy issues never reach the patient record.</p>
+
+  <div style="display:grid; gap:12px; margin-top: 22px;">
+
+    <div class="card risk-high">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+        <div><h4>R-01 — No LOIs secured by Week 4</h4><p style="margin-top:6px;">Mitigation: Do not start build before LOIs. Pivot specialty or pricing if 20 interviews yield zero LOIs. This is the pre-condition for all subsequent investment of time and capital.</p></div>
+        <span class="risk-badge badge-red">High</span>
+      </div>
+    </div>
+
+    <div class="card risk-high">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+        <div><h4>R-04 — AI extraction accuracy below 85%</h4><p style="margin-top:6px;">Mitigation: Human review step built into the UI for v1. Staff approves every submission before it is sent. Accuracy improves with each PA processed as the model learns from corrections.</p></div>
+        <span class="risk-badge badge-red">High</span>
+      </div>
+    </div>
+
+    <div class="card risk-medium">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+        <div><h4>R-03 — Payer portals block browser automation</h4><p style="margin-top:6px;">Mitigation: FHIR API integration by Month 14 eliminates browser automation dependency entirely. Short-term: use official payer developer portal sandbox environments and monitor ToS changes.</p></div>
+        <span class="risk-badge badge-amber">Medium</span>
+      </div>
+    </div>
+
+    <div class="card risk-medium">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+        <div><h4>R-05 — PHI data breach / HIPAA violation</h4><p style="margin-top:6px;">Mitigation: HIPAA-grade AWS infrastructure from Day 1. BAAs with all PHI-touching vendors (Anthropic, Supabase, AWS). External pentest in Week 13. Cyber insurance by Month 6. Vanta continuous controls monitoring.</p></div>
+        <span class="risk-badge badge-amber">Medium</span>
+      </div>
+    </div>
+
+    <div class="card risk-low">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+        <div><h4>R-10 — Seed round fails / insufficient runway</h4><p style="margin-top:6px;">Mitigation: Bootstrap to $20K MRR before raising. Apply to YC S2026. SBIR Phase I ($150–300K) as non-dilutive bridge option. Revenue-first approach makes seed raise optional if traction is strong.</p></div>
+        <span class="risk-badge badge-green">Low–Medium</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════ 12. DEFENSIBILITY & EXIT ══════════════════════ -->
+<div class="section">
+  <div class="section-label">12 — Defensibility & Exit</div>
+  <h2>The Data Network Is the Moat. The Software Is the Vehicle.</h2>
+  <p>Every prior authorization processed by PriorIQ generates a data point: the clinical profile submitted, the payer criteria matched, the approval probability scored, and the outcome recorded. Over time, this longitudinal outcome dataset — spanning payers, drugs, specialties, and practice types — becomes extremely difficult to replicate. A competitor starting today would need years of real-world PA outcomes to match the predictive accuracy of a network that has been learning since launch.</p>
+
+  <div class="card-grid card-grid-3" style="margin-top: 24px;">
+    <div class="card">
+      <div class="card-label">Layer 1 — Easiest to Copy</div>
+      <h4>Technology Features</h4>
+      <p>Software UI, extraction prompts, and workflow automation can be replicated within months by a well-funded team.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer 2 — Moderately Defensible</div>
+      <h4>Workflow Integration</h4>
+      <p>Deep embedding in practice workflows, EHR integrations, and staff habits creates switching friction that takes 6–18 months to replicate.</p>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-label">Layer 3 — Extremely Difficult to Replicate</div>
+      <h4>Payer Intelligence Network</h4>
+      <p>Longitudinal authorization outcomes, denial patterns, appeal success rates, and payer behavior data by specialty. Cannot be purchased or scraped — it must be earned through real PA volume.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.2rem; font-weight:700; margin: 32px 0 14px;">Exit Landscape</h3>
+  <p>PriorIQ is positioned in a highly acquisitive part of the healthcare technology market. The combination of payer intelligence, specialty-specific outcome data, and FHIR-native infrastructure makes the company strategically valuable to EHR platforms seeking to deepen their payer workflows, RCM companies seeking intelligence layers, and large payers seeking to reduce their own administrative costs.</p>
+
+  <div class="card-grid card-grid-2" style="margin-top: 18px;">
+    <div class="card">
+      <h4>Strategic Acquirer Categories</h4>
+      <p style="margin-top:8px;">EHR platforms (Epic, Oracle Health), Revenue Cycle Management (Waystar, R1 RCM), Payer Technology & PBMs (Optum, CVS Health/Aetna), Clinical Documentation players seeking specialty expansion</p>
+    </div>
+    <div class="card">
+      <h4>Comparable Transaction Categories</h4>
+      <p style="margin-top:8px;">Revenue cycle management SaaS acquired at 8–15× ARR. Clinical workflow tools at 10–20× ARR. Healthcare AI infrastructure at strategic premium above ARR multiples when data assets are differentiated.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ 13. CLOSING ══════════════════════ -->
+<div class="section">
+  <div class="section-label">13 — Investment Thesis</div>
+  <h2>Eight Reasons PriorIQ Wins</h2>
+  <div class="card-grid card-grid-2" style="margin-top: 18px;">
+    <div class="card card-accent"><h4>Mandatory, Massive Problem</h4><p>Prior authorization is not discretionary. It touches every specialty biologic prescription. The pain is structural, not cyclical.</p></div>
+    <div class="card card-accent"><h4>Regulatory Tailwind</h4><p>CMS-0057-F is live. FHIR PA APIs are mandated by January 2027. The regulatory forcing function is unprecedented in healthcare administration.</p></div>
+    <div class="card card-accent"><h4>Immediate, Measurable ROI</h4><p>One prevented biologic denial pays for the annual subscription. Time savings are quantifiable from Day 1. Practices see payback within 30–60 days.</p></div>
+    <div class="card card-accent"><h4>AI-Native Architecture</h4><p>Built on Claude API and FHIR infrastructure from the ground up — not retrofitted onto legacy workflow systems that were never designed for intelligence.</p></div>
+    <div class="card card-accent"><h4>Specialty-First GTM</h4><p>Rheumatology creates the fastest path to product-market fit and the densest initial outcome dataset. A horizontal approach would have diluted both.</p></div>
+    <div class="card card-accent"><h4>Proprietary Payer Intelligence</h4><p>Every PA processed builds the network. The approval outcome dataset becomes the moat that makes every subsequent prediction more accurate.</p></div>
+    <div class="card card-accent"><h4>Multiple Revenue Streams</h4><p>Subscription + transaction + appeal automation + future shared savings creates strong net revenue retention and multiple expansion vectors.</p></div>
+    <div class="card card-dark"><h4>Venture-Scale Expansion</h4><p>Prior authorization is the beachhead. The platform evolves into benefits verification, medical necessity, specialty drug access, and revenue cycle intelligence — a category-defining healthcare approval infrastructure company.</p></div>
+  </div>
+
+  <div class="insight" style="margin-top: 32px; font-size: 1.05rem; font-style: normal; font-weight: 500;">
+    PriorIQ is building the intelligence network that determines how specialty healthcare gets approved, reimbursed, and delivered. Prior authorization is the entry point. The long-term opportunity is becoming the decision infrastructure for all of specialty care.
+  </div>
+</div>
+
+
+<!-- ══════════════════════ 14. PA WORKFLOW ══════════════════════ -->
+<div class="section">
+  <div class="section-label">14 — Product Workflow</div>
+  <h2>End-to-End PA Automation: From Patient Record to Approval</h2>
+  <p>Every prior authorization processed by PriorIQ follows a structured 7-step pipeline. Staff interact only at Step 3 (review and approve), reducing their per-authorization effort from 45–90 minutes to under 5 minutes. All other steps are automated and logged for continuous model improvement.</p>
+
+  <!-- WORKFLOW DIAGRAM -->
+  <div style="overflow-x:auto; margin: 28px 0;">
+  <svg viewBox="0 0 1060 560" style="width:100%;min-width:780px;display:block;font-family:'DM Sans',sans-serif;">
+    <defs>
+      <linearGradient id="hdrGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#0891b2"/>
+        <stop offset="100%" stop-color="#0d9488"/>
+      </linearGradient>
+      <linearGradient id="stepGrad1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0fdff"/>
+        <stop offset="100%" stop-color="#e0f7fa"/>
+      </linearGradient>
+      <linearGradient id="stepGradHL" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fff7ed"/>
+        <stop offset="100%" stop-color="#fef3c7"/>
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.09"/>
+      </filter>
+      <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#0891b2"/>
+      </marker>
+      <marker id="arr-down" markerWidth="8" markerHeight="8" refX="3" refY="6" orient="auto">
+        <path d="M0,0 L6,0 L3,8 z" fill="#0891b2"/>
+      </marker>
+    </defs>
+
+    <!-- BG -->
+    <rect width="1060" height="560" rx="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="1060" height="52" rx="18" fill="url(#hdrGrad)"/>
+    <rect x="0" y="36" width="1060" height="16" fill="url(#hdrGrad)"/>
+    <text x="530" y="33" text-anchor="middle" fill="white" font-size="16" font-weight="700" letter-spacing="0.5">PriorIQ Health — Prior Authorization Automation Workflow</text>
+
+    <!-- LANE LABELS -->
+    <rect x="16" y="62" width="90" height="480" rx="10" fill="rgba(8,145,178,.06)" stroke="rgba(8,145,178,.12)" stroke-width="1"/>
+    <text transform="rotate(-90,61,302)" x="61" y="302" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">PROVIDER STAFF</text>
+
+    <rect x="116" y="62" width="828" height="480" rx="10" fill="rgba(16,185,129,.03)" stroke="rgba(16,185,129,.1)" stroke-width="1"/>
+    <text x="530" y="80" text-anchor="middle" fill="#0d9488" font-size="12" font-weight="700">PRIORIQ AUTOMATED PIPELINE</text>
+
+    <!-- Step boxes: x positions for 7 steps across 830px range (116+14 to 944-14) -->
+    <!-- Each box: w=100, spaced evenly. Start x=130, gap=110 -->
+    <!-- Step 1: x=130 -->
+    <!-- Step 2: x=248 -->
+    <!-- Step 3: x=366 (human, highlight) -->
+    <!-- Step 4: x=484 -->
+    <!-- Step 5: x=602 -->
+    <!-- Step 6: x=720 -->
+    <!-- Step 7: x=838 -->
+
+    <!-- Step 1 — Ingest -->
+    <rect x="130" y="95" width="106" height="130" rx="12" fill="url(#stepGrad1)" stroke="#0891b2" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="130" y="95" width="106" height="26" rx="12" fill="#0891b2"/>
+    <rect x="130" y="107" width="106" height="14" fill="#0891b2"/>
+    <text x="183" y="113" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 1</text>
+    <text x="183" y="143" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Ingest</text>
+    <text x="183" y="158" text-anchor="middle" fill="#334155" font-size="10">EHR note upload</text>
+    <text x="183" y="171" text-anchor="middle" fill="#334155" font-size="10">or paste (PDF/</text>
+    <text x="183" y="184" text-anchor="middle" fill="#334155" font-size="10">DOCX/text)</text>
+    <text x="183" y="200" text-anchor="middle" fill="#64748b" font-size="9.5">→ S3 encrypted</text>
+    <text x="183" y="213" text-anchor="middle" fill="#64748b" font-size="9.5">AES-256 + KMS</text>
+
+    <!-- Step 2 — Extract -->
+    <rect x="250" y="95" width="106" height="130" rx="12" fill="url(#stepGrad1)" stroke="#0891b2" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="250" y="95" width="106" height="26" rx="12" fill="#0891b2"/>
+    <rect x="250" y="107" width="106" height="14" fill="#0891b2"/>
+    <text x="303" y="113" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 2</text>
+    <text x="303" y="143" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">AI Extract</text>
+    <text x="303" y="158" text-anchor="middle" fill="#334155" font-size="10">Claude API reads</text>
+    <text x="303" y="171" text-anchor="middle" fill="#334155" font-size="10">doc + RAG pulls</text>
+    <text x="303" y="184" text-anchor="middle" fill="#334155" font-size="10">payer criteria</text>
+    <text x="303" y="200" text-anchor="middle" fill="#64748b" font-size="9.5">→ 20–35 fields</text>
+    <text x="303" y="213" text-anchor="middle" fill="#64748b" font-size="9.5">confidence scored</text>
+
+    <!-- Step 3 — Human Review (HIGHLIGHT) -->
+    <rect x="370" y="88" width="112" height="144" rx="12" fill="url(#stepGradHL)" stroke="#f59e0b" stroke-width="2.5" filter="url(#shadow)"/>
+    <rect x="370" y="88" width="112" height="26" rx="12" fill="#f59e0b"/>
+    <rect x="370" y="100" width="112" height="14" fill="#f59e0b"/>
+    <text x="426" y="106" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 3 ★ HUMAN</text>
+    <text x="426" y="133" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">Staff Review</text>
+    <text x="426" y="148" text-anchor="middle" fill="#334155" font-size="10">Pre-filled form shown.</text>
+    <text x="426" y="161" text-anchor="middle" fill="#334155" font-size="10">Amber = low conf.</text>
+    <text x="426" y="174" text-anchor="middle" fill="#334155" font-size="10">Staff corrects +</text>
+    <text x="426" y="187" text-anchor="middle" fill="#334155" font-size="10">approves (one click)</text>
+    <text x="426" y="204" text-anchor="middle" fill="#64748b" font-size="9.5">Edits logged for</text>
+    <text x="426" y="217" text-anchor="middle" fill="#64748b" font-size="9.5">model retraining</text>
+
+    <!-- Step 4 — Score -->
+    <rect x="498" y="95" width="106" height="130" rx="12" fill="url(#stepGrad1)" stroke="#0891b2" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="498" y="95" width="106" height="26" rx="12" fill="#0891b2"/>
+    <rect x="498" y="107" width="106" height="14" fill="#0891b2"/>
+    <text x="551" y="113" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 4</text>
+    <text x="551" y="143" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Score &amp; Flag</text>
+    <text x="551" y="158" text-anchor="middle" fill="#334155" font-size="10">Denial predictor</text>
+    <text x="551" y="171" text-anchor="middle" fill="#334155" font-size="10">scores approval</text>
+    <text x="551" y="184" text-anchor="middle" fill="#334155" font-size="10">probability</text>
+    <text x="551" y="200" text-anchor="middle" fill="#64748b" font-size="9.5">→ Missing evidence</text>
+    <text x="551" y="213" text-anchor="middle" fill="#64748b" font-size="9.5">flagged + suggested</text>
+
+    <!-- Step 5 — Submit -->
+    <rect x="618" y="95" width="106" height="130" rx="12" fill="url(#stepGrad1)" stroke="#0891b2" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="618" y="95" width="106" height="26" rx="12" fill="#0891b2"/>
+    <rect x="618" y="107" width="106" height="14" fill="#0891b2"/>
+    <text x="671" y="113" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 5</text>
+    <text x="671" y="143" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Submit</text>
+    <text x="671" y="158" text-anchor="middle" fill="#334155" font-size="10">Playwright opens</text>
+    <text x="671" y="171" text-anchor="middle" fill="#334155" font-size="10">payer portal.</text>
+    <text x="671" y="184" text-anchor="middle" fill="#334155" font-size="10">Auto-fills + submits</text>
+    <text x="671" y="200" text-anchor="middle" fill="#64748b" font-size="9.5">→ FHIR PAS API</text>
+    <text x="671" y="213" text-anchor="middle" fill="#64748b" font-size="9.5">(Jan 2027+)</text>
+
+    <!-- Step 6 — Log Outcome -->
+    <rect x="738" y="95" width="106" height="130" rx="12" fill="url(#stepGrad1)" stroke="#0891b2" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect x="738" y="95" width="106" height="26" rx="12" fill="#0891b2"/>
+    <rect x="738" y="107" width="106" height="14" fill="#0891b2"/>
+    <text x="791" y="113" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 6</text>
+    <text x="791" y="143" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Log Outcome</text>
+    <text x="791" y="158" text-anchor="middle" fill="#334155" font-size="10">Approved / Denied</text>
+    <text x="791" y="171" text-anchor="middle" fill="#334155" font-size="10">/ Pending stored</text>
+    <text x="791" y="184" text-anchor="middle" fill="#334155" font-size="10">in PostgreSQL</text>
+    <text x="791" y="200" text-anchor="middle" fill="#64748b" font-size="9.5">Denial code +</text>
+    <text x="791" y="213" text-anchor="middle" fill="#64748b" font-size="9.5">reason captured</text>
+
+    <!-- Step 7 — Appeal (if denied) -->
+    <rect x="858" y="95" width="106" height="130" rx="12" fill="url(#stepGrad1)" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="858" y="95" width="106" height="26" rx="12" fill="#10b981"/>
+    <rect x="858" y="107" width="106" height="14" fill="#10b981"/>
+    <text x="911" y="113" text-anchor="middle" fill="white" font-size="11" font-weight="700">STEP 7 (IF DENIED)</text>
+    <text x="911" y="143" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">Appeal</text>
+    <text x="911" y="158" text-anchor="middle" fill="#334155" font-size="10">Appeal Intelligence</text>
+    <text x="911" y="171" text-anchor="middle" fill="#334155" font-size="10">drafts optimized</text>
+    <text x="911" y="184" text-anchor="middle" fill="#334155" font-size="10">peer-to-peer letter</text>
+    <text x="911" y="200" text-anchor="middle" fill="#64748b" font-size="9.5">→ Success rates</text>
+    <text x="911" y="213" text-anchor="middle" fill="#64748b" font-size="9.5">fed back to model</text>
+
+    <!-- Arrows between steps -->
+    <line x1="236" y1="160" x2="248" y2="160" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="356" y1="160" x2="368" y2="160" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="482" y1="160" x2="496" y2="160" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="604" y1="160" x2="616" y2="160" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="724" y1="160" x2="736" y2="160" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="844" y1="160" x2="856" y2="160" stroke="#0891b2" stroke-width="2" marker-end="url(#arr)"/>
+
+    <!-- Feedback loop from Step 6 back down — show intelligence loop -->
+    <path d="M791,225 Q791,280 530,290 Q270,300 183,280 Q183,260 183,240" stroke="#0891b2" stroke-width="1.5" fill="none" stroke-dasharray="5,4" opacity="0.5" marker-end="url(#arr)"/>
+    <text x="487" y="300" text-anchor="middle" fill="#0891b2" font-size="10" font-style="italic" opacity="0.7">Outcome data feeds back to improve extraction accuracy + denial prediction</text>
+
+    <!-- Staff interaction line -->
+    <line x1="61" y1="160" x2="128" y2="160" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+    <line x1="61" y1="90" x2="61" y2="232" stroke="#f59e0b" stroke-width="1.5" opacity="0.4"/>
+    <line x1="61" y1="232" x2="368" y2="232" stroke="#f59e0b" stroke-width="1.5" opacity="0.4" marker-end="url(#arr)"/>
+    <text x="200" y="246" text-anchor="middle" fill="#b45309" font-size="10" font-style="italic">Staff uploads doc</text>
+    <text x="61" y="270" text-anchor="middle" fill="#b45309" font-size="10" font-style="italic" writing-mode="lr">↑ Review only</text>
+
+    <!-- TIME METRICS BAR -->
+    <rect x="16" y="340" width="1028" height="100" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="530" y="363" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="700">Time Comparison per Authorization</text>
+    <!-- Manual bar -->
+    <text x="28" y="386" fill="#64748b" font-size="11">Manual</text>
+    <rect x="100" y="374" width="680" height="22" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
+    <text x="786" y="389" fill="#dc2626" font-size="11" font-weight="700">45–90 min</text>
+    <!-- PriorIQ bar -->
+    <text x="28" y="416" fill="#64748b" font-size="11">PriorIQ</text>
+    <rect x="100" y="404" width="50" height="22" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+    <text x="156" y="419" fill="#15803d" font-size="11" font-weight="700">&lt;5 min</text>
+    <text x="350" y="419" fill="#64748b" font-size="10" font-style="italic">Staff only reviews Step 3 — all other steps automated</text>
+
+    <!-- PERFORMANCE METRICS ROW -->
+    <rect x="16" y="452" width="240" height="90" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="136" y="478" text-anchor="middle" fill="#0891b2" font-size="10" font-weight="700" letter-spacing="0.04em">AI ACCURACY TARGET</text>
+    <text x="136" y="508" text-anchor="middle" fill="#0f172a" font-size="28" font-weight="900">≥85%</text>
+    <text x="136" y="528" text-anchor="middle" fill="#64748b" font-size="10">POC · ≥95% production</text>
+
+    <rect x="270" y="452" width="240" height="90" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="390" y="478" text-anchor="middle" fill="#0891b2" font-size="10" font-weight="700" letter-spacing="0.04em">DENIAL REDUCTION</text>
+    <text x="390" y="508" text-anchor="middle" fill="#0f172a" font-size="28" font-weight="900">25%+</text>
+    <text x="390" y="528" text-anchor="middle" fill="#64748b" font-size="10">First-pass target</text>
+
+    <rect x="524" y="452" width="240" height="90" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="644" y="478" text-anchor="middle" fill="#0891b2" font-size="10" font-weight="700" letter-spacing="0.04em">FIELDS EXTRACTED</text>
+    <text x="644" y="508" text-anchor="middle" fill="#0f172a" font-size="28" font-weight="900">20–35</text>
+    <text x="644" y="528" text-anchor="middle" fill="#64748b" font-size="10">Per PA document</text>
+
+    <rect x="778" y="452" width="266" height="90" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="911" y="478" text-anchor="middle" fill="#0891b2" font-size="10" font-weight="700" letter-spacing="0.04em">AI API COST PER PA</text>
+    <text x="911" y="508" text-anchor="middle" fill="#0f172a" font-size="28" font-weight="900">~$0.015</text>
+    <text x="911" y="528" text-anchor="middle" fill="#64748b" font-size="10">Claude Sonnet pricing</text>
+
+  </svg>
+  </div>
+</div>
+
+<!-- ══════════════════════ 15. ARCHITECTURE DIAGRAM ══════════════════════ -->
+<div class="section">
+  <div class="section-label">15 — System Architecture</div>
+  <h2>Three-Layer HIPAA-Compliant Architecture</h2>
+  <p>PriorIQ uses a three-layer architecture isolated by security boundary: a <strong>presentation layer</strong> (Next.js frontend — zero PHI in client state), an <strong>AI processing layer</strong> (AWS Lambda + Claude API + pgvector RAG — all PHI encrypted in transit and at rest), and a <strong>submission layer</strong> (Playwright browser automation → FHIR APIs post-2027). All layers are VPC-isolated, CloudTrail-logged, and continuously monitored by Vanta for HIPAA and SOC 2 compliance.</p>
+
+  <div style="overflow-x:auto; margin: 28px 0;">
+  <svg viewBox="0 0 1060 680" style="width:100%;min-width:820px;display:block;font-family:'DM Sans',sans-serif;">
+    <defs>
+      <linearGradient id="archHdr" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#1e3a5f"/>
+        <stop offset="100%" stop-color="#0891b2"/>
+      </linearGradient>
+      <linearGradient id="layerA" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#eff6ff" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#dbeafe" stop-opacity="0.6"/>
+      </linearGradient>
+      <linearGradient id="layerB" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0fdff" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#cffafe" stop-opacity="0.6"/>
+      </linearGradient>
+      <linearGradient id="layerC" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0fdf4" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#dcfce7" stop-opacity="0.6"/>
+      </linearGradient>
+      <linearGradient id="layerD" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fefce8" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#fef9c3" stop-opacity="0.6"/>
+      </linearGradient>
+      <filter id="sh2" x="-8%" y="-8%" width="116%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+      </filter>
+      <marker id="arr2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L7,3.5 z" fill="#0891b2"/>
+      </marker>
+      <marker id="arr2g" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L7,3.5 z" fill="#10b981"/>
+      </marker>
+      <marker id="arr2r" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L7,3.5 z" fill="#f59e0b"/>
+      </marker>
+    </defs>
+
+    <!-- BG -->
+    <rect width="1060" height="680" rx="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect x="0" y="0" width="1060" height="52" rx="18" fill="url(#archHdr)"/>
+    <rect x="0" y="36" width="1060" height="16" fill="url(#archHdr)"/>
+    <text x="530" y="33" text-anchor="middle" fill="white" font-size="16" font-weight="700" letter-spacing="0.5">PriorIQ Health — System Architecture (POC → Production)</text>
+
+    <!-- LAYER BANDS -->
+    <!-- Layer 1: Presentation (y=62 h=110) -->
+    <rect x="12" y="62" width="1036" height="115" rx="10" fill="url(#layerA)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+    <text x="22" y="82" fill="#2563eb" font-size="11" font-weight="700">LAYER 1 — PRESENTATION</text>
+
+    <!-- Layer 2: API / Orchestration (y=185 h=120) -->
+    <rect x="12" y="185" width="1036" height="125" rx="10" fill="url(#layerB)" stroke="#0891b2" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+    <text x="22" y="205" fill="#0891b2" font-size="11" font-weight="700">LAYER 2 — BACKEND API &amp; ORCHESTRATION</text>
+
+    <!-- Layer 3: AI Processing (y=318 h=140) -->
+    <rect x="12" y="318" width="1036" height="140" rx="10" fill="url(#layerB)" stroke="#0891b2" stroke-width="2" opacity="0.8"/>
+    <text x="22" y="338" fill="#0891b2" font-size="11" font-weight="700">LAYER 3 — AI PROCESSING ENGINE</text>
+
+    <!-- Layer 4: Submission (y=466 h=100) -->
+    <rect x="12" y="466" width="1036" height="100" rx="10" fill="url(#layerC)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+    <text x="22" y="486" fill="#10b981" font-size="11" font-weight="700">LAYER 4 — SUBMISSION LAYER</text>
+
+    <!-- Layer 5: Persistence & Compliance (y=574 h=96) -->
+    <rect x="12" y="574" width="1036" height="96" rx="10" fill="url(#layerD)" stroke="#f59e0b" stroke-width="1.5" opacity="0.8"/>
+    <text x="22" y="594" fill="#b45309" font-size="11" font-weight="700">LAYER 5 — DATA PERSISTENCE &amp; COMPLIANCE</text>
+
+    <!-- === LAYER 1 COMPONENTS === -->
+    <!-- Browser client -->
+    <rect x="30" y="90" width="155" height="72" rx="10" fill="white" stroke="#3b82f6" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="107" y="114" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="700">Next.js 15</text>
+    <text x="107" y="130" text-anchor="middle" fill="#64748b" font-size="10">Staff PA Queue UI</text>
+    <text x="107" y="143" text-anchor="middle" fill="#64748b" font-size="10">TypeScript · Vercel</text>
+    <text x="107" y="155" text-anchor="middle" fill="#94a3b8" font-size="9">No PHI in client state</text>
+
+    <!-- Auth -->
+    <rect x="210" y="90" width="155" height="72" rx="10" fill="white" stroke="#3b82f6" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="287" y="114" text-anchor="middle" fill="#2563eb" font-size="12" font-weight="700">Auth.js + MFA</text>
+    <text x="287" y="130" text-anchor="middle" fill="#64748b" font-size="10">TOTP · Role-based</text>
+    <text x="287" y="143" text-anchor="middle" fill="#64748b" font-size="10">Clinic tenancy isolation</text>
+    <text x="287" y="155" text-anchor="middle" fill="#94a3b8" font-size="9">HIPAA access safeguard</text>
+
+    <!-- Clinic EHR -->
+    <rect x="830" y="90" width="200" height="72" rx="10" fill="white" stroke="#94a3b8" stroke-width="1.5" filter="url(#sh2)" stroke-dasharray="5,3"/>
+    <text x="930" y="114" text-anchor="middle" fill="#475569" font-size="12" font-weight="700">Clinic EHR System</text>
+    <text x="930" y="130" text-anchor="middle" fill="#64748b" font-size="10">Epic / Athena / Kareo</text>
+    <text x="930" y="143" text-anchor="middle" fill="#64748b" font-size="10">POC: copy-paste / upload</text>
+    <text x="930" y="155" text-anchor="middle" fill="#94a3b8" font-size="9">Prod: SMART-on-FHIR</text>
+
+    <!-- === LAYER 2 COMPONENTS === -->
+    <rect x="30" y="213" width="155" height="80" rx="10" fill="white" stroke="#0891b2" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="107" y="237" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">API Gateway</text>
+    <text x="107" y="253" text-anchor="middle" fill="#64748b" font-size="10">Node.js / Express</text>
+    <text x="107" y="266" text-anchor="middle" fill="#64748b" font-size="10">AWS Lambda · VPC</text>
+    <text x="107" y="279" text-anchor="middle" fill="#94a3b8" font-size="9">CloudTrail all calls</text>
+
+    <rect x="210" y="213" width="155" height="80" rx="10" fill="white" stroke="#0891b2" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="287" y="237" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Secrets Manager</text>
+    <text x="287" y="253" text-anchor="middle" fill="#64748b" font-size="10">AWS Secrets Manager</text>
+    <text x="287" y="266" text-anchor="middle" fill="#64748b" font-size="10">Payer portal credentials</text>
+    <text x="287" y="279" text-anchor="middle" fill="#94a3b8" font-size="9">Rotation enabled</text>
+
+    <rect x="390" y="213" width="155" height="80" rx="10" fill="white" stroke="#0891b2" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="467" y="237" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Orchestrator</text>
+    <text x="467" y="253" text-anchor="middle" fill="#64748b" font-size="10">PA Job Queue</text>
+    <text x="467" y="266" text-anchor="middle" fill="#64748b" font-size="10">Step coordination</text>
+    <text x="467" y="279" text-anchor="middle" fill="#94a3b8" font-size="9">Async / SQS-backed</text>
+
+    <rect x="570" y="213" width="155" height="80" rx="10" fill="white" stroke="#0891b2" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="647" y="237" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Monitoring</text>
+    <text x="647" y="253" text-anchor="middle" fill="#64748b" font-size="10">AWS CloudWatch</text>
+    <text x="647" y="266" text-anchor="middle" fill="#64748b" font-size="10">Sentry error tracking</text>
+    <text x="647" y="279" text-anchor="middle" fill="#94a3b8" font-size="9">PHI redacted from logs</text>
+
+    <rect x="750" y="213" width="155" height="80" rx="10" fill="white" stroke="#0891b2" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="827" y="237" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">S3 + KMS</text>
+    <text x="827" y="253" text-anchor="middle" fill="#64748b" font-size="10">Document storage</text>
+    <text x="827" y="266" text-anchor="middle" fill="#64748b" font-size="10">AES-256 · 90-day lifecycle</text>
+    <text x="827" y="279" text-anchor="middle" fill="#94a3b8" font-size="9">Pre-signed URLs only</text>
+
+    <!-- === LAYER 3 COMPONENTS === -->
+    <rect x="30" y="348" width="190" height="95" rx="10" fill="white" stroke="#0891b2" stroke-width="2" filter="url(#sh2)"/>
+    <text x="125" y="372" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Claude API</text>
+    <text x="125" y="388" text-anchor="middle" fill="#64748b" font-size="10">claude-sonnet-4-6</text>
+    <text x="125" y="401" text-anchor="middle" fill="#64748b" font-size="10">Clinical doc parsing</text>
+    <text x="125" y="414" text-anchor="middle" fill="#64748b" font-size="10">Criteria field extraction</text>
+    <text x="125" y="430" text-anchor="middle" fill="#94a3b8" font-size="9">BAA signed · zero PHI retention</text>
+
+    <rect x="240" y="348" width="190" height="95" rx="10" fill="white" stroke="#0891b2" stroke-width="2" filter="url(#sh2)"/>
+    <text x="335" y="372" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">pgvector RAG</text>
+    <text x="335" y="388" text-anchor="middle" fill="#64748b" font-size="10">PostgreSQL extension</text>
+    <text x="335" y="401" text-anchor="middle" fill="#64748b" font-size="10">Payer × drug criteria KB</text>
+    <text x="335" y="414" text-anchor="middle" fill="#64748b" font-size="10">50+ combinations</text>
+    <text x="335" y="430" text-anchor="middle" fill="#94a3b8" font-size="9">No PHI in vector store</text>
+
+    <rect x="450" y="348" width="190" height="95" rx="10" fill="white" stroke="#0891b2" stroke-width="2" filter="url(#sh2)"/>
+    <text x="545" y="372" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Denial Predictor</text>
+    <text x="545" y="388" text-anchor="middle" fill="#64748b" font-size="10">ML approval scorer</text>
+    <text x="545" y="401" text-anchor="middle" fill="#64748b" font-size="10">Trained on outcomes</text>
+    <text x="545" y="414" text-anchor="middle" fill="#64748b" font-size="10">AUC target ≥0.72 POC</text>
+    <text x="545" y="430" text-anchor="middle" fill="#94a3b8" font-size="9">Retrained on staff corrections</text>
+
+    <rect x="660" y="348" width="190" height="95" rx="10" fill="white" stroke="#0891b2" stroke-width="2" filter="url(#sh2)"/>
+    <text x="755" y="372" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Appeal Intelligence</text>
+    <text x="755" y="388" text-anchor="middle" fill="#64748b" font-size="10">Denial reason → letter</text>
+    <text x="755" y="401" text-anchor="middle" fill="#64748b" font-size="10">Historical success rates</text>
+    <text x="755" y="414" text-anchor="middle" fill="#64748b" font-size="10">Peer-to-peer templates</text>
+    <text x="755" y="430" text-anchor="middle" fill="#94a3b8" font-size="9">Month 4–8 build phase</text>
+
+    <rect x="870" y="348" width="178" height="95" rx="10" fill="white" stroke="#0891b2" stroke-width="2" filter="url(#sh2)"/>
+    <text x="959" y="372" text-anchor="middle" fill="#0891b2" font-size="12" font-weight="700">Confidence Scorer</text>
+    <text x="959" y="388" text-anchor="middle" fill="#64748b" font-size="10">Per-field confidence</text>
+    <text x="959" y="401" text-anchor="middle" fill="#64748b" font-size="10">Amber flag = low conf.</text>
+    <text x="959" y="414" text-anchor="middle" fill="#64748b" font-size="10">Staff correction logging</text>
+    <text x="959" y="430" text-anchor="middle" fill="#94a3b8" font-size="9">Drives model improvement</text>
+
+    <!-- === LAYER 4 SUBMISSION === -->
+    <rect x="30" y="494" width="210" height="58" rx="10" fill="white" stroke="#10b981" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="135" y="518" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">Playwright Automation</text>
+    <text x="135" y="532" text-anchor="middle" fill="#64748b" font-size="10">UHC · Aetna · BCBS portals</text>
+    <text x="135" y="544" text-anchor="middle" fill="#94a3b8" font-size="9">Isolated Lambda · no stored creds</text>
+
+    <rect x="260" y="494" width="210" height="58" rx="10" fill="white" stroke="#10b981" stroke-width="2" filter="url(#sh2)"/>
+    <text x="365" y="515" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">FHIR Da Vinci APIs</text>
+    <text x="365" y="529" text-anchor="middle" fill="#64748b" font-size="10">CRD · DTR · PAS</text>
+    <text x="365" y="543" text-anchor="middle" fill="#94a3b8" font-size="9">Month 8–14 · Jan 2027 CMS mandate</text>
+
+    <!-- Payer systems -->
+    <rect x="750" y="494" width="140" height="58" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5" filter="url(#sh2)" stroke-dasharray="5,3"/>
+    <text x="820" y="518" text-anchor="middle" fill="#475569" font-size="12" font-weight="700">UHC Portal</text>
+    <text x="820" y="533" text-anchor="middle" fill="#94a3b8" font-size="9.5">Payer</text>
+    <rect x="900" y="494" width="140" height="58" rx="10" fill="#fff" stroke="#94a3b8" stroke-width="1.5" filter="url(#sh2)" stroke-dasharray="5,3"/>
+    <text x="970" y="518" text-anchor="middle" fill="#475569" font-size="12" font-weight="700">Aetna / BCBS</text>
+    <text x="970" y="533" text-anchor="middle" fill="#94a3b8" font-size="9.5">Payer</text>
+
+    <!-- === LAYER 5 PERSISTENCE === -->
+    <rect x="30" y="602" width="180" height="56" rx="10" fill="white" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="120" y="625" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">PostgreSQL / RDS</text>
+    <text x="120" y="639" text-anchor="middle" fill="#64748b" font-size="10">PA records · Outcomes</text>
+    <text x="120" y="652" text-anchor="middle" fill="#94a3b8" font-size="9">AES-256 · Multi-AZ</text>
+
+    <rect x="228" y="602" width="180" height="56" rx="10" fill="white" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="318" y="625" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">Vanta</text>
+    <text x="318" y="639" text-anchor="middle" fill="#64748b" font-size="10">HIPAA + SOC 2 controls</text>
+    <text x="318" y="652" text-anchor="middle" fill="#94a3b8" font-size="9">Continuous monitoring</text>
+
+    <rect x="426" y="602" width="180" height="56" rx="10" fill="white" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="516" y="625" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">Audit Trail</text>
+    <text x="516" y="639" text-anchor="middle" fill="#64748b" font-size="10">CloudTrail · 7-year retain</text>
+    <text x="516" y="652" text-anchor="middle" fill="#94a3b8" font-size="9">PHI redacted from logs</text>
+
+    <rect x="624" y="602" width="180" height="56" rx="10" fill="white" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="714" y="625" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">Intelligence Network</text>
+    <text x="714" y="639" text-anchor="middle" fill="#64748b" font-size="10">Approval · Denial · Appeal</text>
+    <text x="714" y="652" text-anchor="middle" fill="#94a3b8" font-size="9">Proprietary outcome dataset</text>
+
+    <rect x="822" y="602" width="218" height="56" rx="10" fill="white" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh2)"/>
+    <text x="931" y="625" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">BAA Vendor Log</text>
+    <text x="931" y="639" text-anchor="middle" fill="#64748b" font-size="10">AWS · Anthropic · Supabase</text>
+    <text x="931" y="652" text-anchor="middle" fill="#94a3b8" font-size="9">Twilio · SendGrid</text>
+
+    <!-- FLOW ARROWS between layers -->
+    <!-- L1 → L2 -->
+    <line x1="107" y1="162" x2="107" y2="211" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <line x1="467" y1="162" x2="467" y2="211" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <!-- L2 → L3 -->
+    <line x1="125" y1="293" x2="125" y2="346" stroke="#0891b2" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <line x1="467" y1="293" x2="467" y2="346" stroke="#0891b2" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <!-- L3 → L4 -->
+    <line x1="135" y1="443" x2="135" y2="492" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr2g)"/>
+    <line x1="365" y1="443" x2="365" y2="492" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr2g)"/>
+    <!-- Playwright → Payer portals -->
+    <line x1="240" y1="522" x2="748" y2="522" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr2g)"/>
+    <!-- L4/L3 → L5 -->
+    <line x1="120" y1="552" x2="120" y2="600" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr2r)"/>
+    <line x1="714" y1="443" x2="714" y2="600" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr2r)"/>
+    <!-- EHR → S3 -->
+    <line x1="880" y1="126" x2="830" y2="126" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+
+    <!-- Legend -->
+    <rect x="490" y="494" width="245" height="100" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="612" y="514" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="700">Connection Legend</text>
+    <line x1="504" y1="530" x2="544" y2="530" stroke="#0891b2" stroke-width="2" marker-end="url(#arr2)"/>
+    <text x="550" y="534" fill="#334155" font-size="10">PHI data flow (encrypted)</text>
+    <line x1="504" y1="548" x2="544" y2="548" stroke="#10b981" stroke-width="2" marker-end="url(#arr2g)"/>
+    <text x="550" y="552" fill="#334155" font-size="10">Submission flow</text>
+    <line x1="504" y1="566" x2="544" y2="566" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr2r)"/>
+    <text x="550" y="570" fill="#334155" font-size="10">Persistence / audit flow</text>
+    <line x1="504" y1="583" x2="544" y2="583" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr2)"/>
+    <text x="550" y="587" fill="#334155" font-size="10">External / future integration</text>
+
+  </svg>
+  </div>
+</div>
+
+<!-- ══════════════════════ 16. NETWORK / DATA INTELLIGENCE DIAGRAM ══════════════════════ -->
+<div class="section">
+  <div class="section-label">16 — Intelligence Network &amp; Data Flow</div>
+  <h2>The Network Effect: Every PA Makes the Next One Smarter</h2>
+  <p>The PriorIQ Intelligence Network is the long-term moat. Every prior authorization processed — regardless of outcome — contributes structured data to four interconnected intelligence layers. Over time, the network's predictive accuracy compounds in ways that competitors building from scratch cannot match. This is what makes PriorIQ a data business, not just a workflow tool.</p>
+
+  <div style="overflow-x:auto; margin: 28px 0;">
+  <svg viewBox="0 0 1060 620" style="width:100%;min-width:800px;display:block;font-family:'DM Sans',sans-serif;">
+    <defs>
+      <radialGradient id="netCore" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#0891b2" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#0e7490" stop-opacity="1"/>
+      </radialGradient>
+      <radialGradient id="netNode" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#f0fdff"/>
+      </radialGradient>
+      <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="sh3">
+        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0891b2" flood-opacity="0.15"/>
+      </filter>
+      <marker id="net-arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L7,3.5 z" fill="#0891b2" opacity="0.7"/>
+      </marker>
+      <marker id="net-arr2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+        <path d="M0,0 L0,7 L7,3.5 z" fill="#10b981" opacity="0.7"/>
+      </marker>
+    </defs>
+
+    <!-- BG -->
+    <rect width="1060" height="620" rx="18" fill="#0f172a"/>
+
+    <!-- Subtle grid -->
+    <g opacity="0.04" stroke="white" stroke-width="1">
+      <line x1="0" y1="62" x2="1060" y2="62"/>
+      <line x1="0" y1="155" x2="1060" y2="155"/>
+      <line x1="0" y1="248" x2="1060" y2="248"/>
+      <line x1="0" y1="341" x2="1060" y2="341"/>
+      <line x1="0" y1="434" x2="1060" y2="434"/>
+      <line x1="0" y1="527" x2="1060" y2="527"/>
+      <line x1="133" y1="0" x2="133" y2="620"/>
+      <line x1="265" y1="0" x2="265" y2="620"/>
+      <line x1="398" y1="0" x2="398" y2="620"/>
+      <line x1="530" y1="0" x2="530" y2="620"/>
+      <line x1="663" y1="0" x2="663" y2="620"/>
+      <line x1="795" y1="0" x2="795" y2="620"/>
+      <line x1="928" y1="0" x2="928" y2="620"/>
+    </g>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="1060" height="52" rx="18" fill="rgba(8,145,178,0.18)" stroke="rgba(8,145,178,0.3)" stroke-width="1"/>
+    <rect x="0" y="36" width="1060" height="16" fill="rgba(8,145,178,0.18)"/>
+    <text x="530" y="33" text-anchor="middle" fill="white" font-size="16" font-weight="700" letter-spacing="0.5">PriorIQ Intelligence Network — Data Flow &amp; Learning Loop</text>
+
+    <!-- ── CENTRAL CORE ── -->
+    <circle cx="530" cy="320" r="88" fill="rgba(8,145,178,0.12)" stroke="rgba(8,145,178,0.3)" stroke-width="1"/>
+    <circle cx="530" cy="320" r="68" fill="rgba(8,145,178,0.18)" stroke="rgba(8,145,178,0.4)" stroke-width="1.5"/>
+    <circle cx="530" cy="320" r="50" fill="url(#netCore)" filter="url(#sh3)"/>
+    <text x="530" y="311" text-anchor="middle" fill="white" font-size="13" font-weight="900">PriorIQ</text>
+    <text x="530" y="327" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="11">Intelligence</text>
+    <text x="530" y="341" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="11">Network</text>
+
+    <!-- ── INPUT NODES (left column) ── -->
+    <!-- Provider Practice -->
+    <rect x="30" y="100" width="185" height="90" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" filter="url(#sh3)"/>
+    <text x="122" y="128" text-anchor="middle" fill="white" font-size="13" font-weight="700">🏥 Provider Practice</text>
+    <text x="122" y="147" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Rheumatology · Oncology</text>
+    <text x="122" y="162" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">150–200 PAs/month/practice</text>
+    <text x="122" y="177" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Clinical docs · Staff corrections</text>
+
+    <!-- Payer Portals -->
+    <rect x="30" y="220" width="185" height="90" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <text x="122" y="248" text-anchor="middle" fill="white" font-size="13" font-weight="700">💳 Payer Portals</text>
+    <text x="122" y="267" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">UHC · Aetna · BCBS · CMS</text>
+    <text x="122" y="282" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Approval / Denial decisions</text>
+    <text x="122" y="297" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Denial reason codes</text>
+
+    <!-- Payer Criteria KB -->
+    <rect x="30" y="340" width="185" height="90" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <text x="122" y="368" text-anchor="middle" fill="white" font-size="13" font-weight="700">📚 Payer Criteria KB</text>
+    <text x="122" y="387" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">50+ payer × drug × indication</text>
+    <text x="122" y="402" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Step therapy rules</text>
+    <text x="122" y="417" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Formulary tier data</text>
+
+    <!-- Appeal Outcomes -->
+    <rect x="30" y="460" width="185" height="90" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <text x="122" y="488" text-anchor="middle" fill="white" font-size="13" font-weight="700">⚖️ Appeal Outcomes</text>
+    <text x="122" y="507" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Peer-to-peer results</text>
+    <text x="122" y="522" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Reversal rates by payer</text>
+    <text x="122" y="537" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Winning argument patterns</text>
+
+    <!-- ── OUTPUT NODES (right column) ── -->
+    <!-- Approval Copilot -->
+    <rect x="845" y="100" width="195" height="90" rx="14" fill="rgba(8,145,178,0.15)" stroke="rgba(8,145,178,0.4)" stroke-width="1.5" filter="url(#sh3)"/>
+    <text x="942" y="128" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">Authorization Copilot</text>
+    <text x="942" y="147" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Field extraction accuracy ≥95%</text>
+    <text x="942" y="162" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Confidence scoring per field</text>
+    <text x="942" y="177" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">One-click submit &lt;5 min</text>
+
+    <!-- Denial Predictor -->
+    <rect x="845" y="220" width="195" height="90" rx="14" fill="rgba(8,145,178,0.15)" stroke="rgba(8,145,178,0.4)" stroke-width="1.5"/>
+    <text x="942" y="248" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">Denial Prediction</text>
+    <text x="942" y="267" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Approval probability score</text>
+    <text x="942" y="282" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Missing evidence flags</text>
+    <text x="942" y="297" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">25%+ denial reduction target</text>
+
+    <!-- Appeal Intelligence -->
+    <rect x="845" y="340" width="195" height="90" rx="14" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
+    <text x="942" y="368" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">Appeal Intelligence</text>
+    <text x="942" y="387" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Optimized appeal letters</text>
+    <text x="942" y="402" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Peer-to-peer strategy</text>
+    <text x="942" y="417" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Success-weighted templates</text>
+
+    <!-- Analytics Dashboard -->
+    <rect x="845" y="460" width="195" height="90" rx="14" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
+    <text x="942" y="488" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="700">Practice Analytics</text>
+    <text x="942" y="507" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Approval rate trends</text>
+    <text x="942" y="522" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Payer behavior insights</text>
+    <text x="942" y="537" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="10">Time savings dashboard</text>
+
+    <!-- ── CONNECTING LINES: Inputs → Core ── -->
+    <line x1="215" y1="145" x2="478" y2="300" stroke="rgba(8,145,178,0.6)" stroke-width="2" marker-end="url(#net-arr)"/>
+    <line x1="215" y1="265" x2="480" y2="305" stroke="rgba(8,145,178,0.6)" stroke-width="2" marker-end="url(#net-arr)"/>
+    <line x1="215" y1="385" x2="480" y2="322" stroke="rgba(8,145,178,0.6)" stroke-width="2" marker-end="url(#net-arr)"/>
+    <line x1="215" y1="505" x2="480" y2="340" stroke="rgba(8,145,178,0.6)" stroke-width="2" marker-end="url(#net-arr)"/>
+
+    <!-- Input labels on lines -->
+    <text x="330" y="208" text-anchor="middle" fill="rgba(103,232,249,0.8)" font-size="9" font-style="italic">Clinical documents + corrections</text>
+    <text x="330" y="268" text-anchor="middle" fill="rgba(103,232,249,0.8)" font-size="9" font-style="italic">Approval + denial signals</text>
+    <text x="330" y="355" text-anchor="middle" fill="rgba(103,232,249,0.8)" font-size="9" font-style="italic">Criteria rules + updates</text>
+    <text x="330" y="438" text-anchor="middle" fill="rgba(103,232,249,0.8)" font-size="9" font-style="italic">Appeal win/loss data</text>
+
+    <!-- ── CONNECTING LINES: Core → Outputs ── -->
+    <line x1="582" y1="300" x2="843" y2="145" stroke="rgba(8,145,178,0.6)" stroke-width="2" marker-end="url(#net-arr)"/>
+    <line x1="582" y1="310" x2="843" y2="265" stroke="rgba(8,145,178,0.6)" stroke-width="2" marker-end="url(#net-arr)"/>
+    <line x1="582" y1="322" x2="843" y2="385" stroke="rgba(16,185,129,0.6)" stroke-width="2" marker-end="url(#net-arr2)"/>
+    <line x1="582" y1="340" x2="843" y2="505" stroke="rgba(16,185,129,0.6)" stroke-width="2" marker-end="url(#net-arr2)"/>
+
+    <!-- Output labels -->
+    <text x="730" y="205" text-anchor="middle" fill="rgba(103,232,249,0.8)" font-size="9" font-style="italic">Trained extraction model</text>
+    <text x="730" y="268" text-anchor="middle" fill="rgba(103,232,249,0.8)" font-size="9" font-style="italic">Probability scores + flags</text>
+    <text x="730" y="365" text-anchor="middle" fill="rgba(110,231,183,0.8)" font-size="9" font-style="italic">Appeal strategy output</text>
+    <text x="730" y="440" text-anchor="middle" fill="rgba(110,231,183,0.8)" font-size="9" font-style="italic">Practice performance reports</text>
+
+    <!-- ── FEEDBACK LOOPS ── -->
+    <!-- Outputs back to Core improvement (dotted) -->
+    <path d="M942,190 Q970,320 942,440" stroke="rgba(110,231,183,0.25)" stroke-width="1.5" fill="none" stroke-dasharray="5,4"/>
+    <text x="978" y="320" text-anchor="middle" fill="rgba(110,231,183,0.4)" font-size="9" font-style="italic" writing-mode="tb-rl">Continuous learning loop</text>
+
+    <!-- ── NETWORK EFFECT INDICATORS ── -->
+    <!-- Orbiting practice count indicators -->
+    <circle cx="530" cy="180" r="22" fill="rgba(8,145,178,0.2)" stroke="rgba(8,145,178,0.5)" stroke-width="1.5"/>
+    <text x="530" y="175" text-anchor="middle" fill="white" font-size="9" font-weight="700">PA</text>
+    <text x="530" y="189" text-anchor="middle" fill="#67e8f9" font-size="9">Volume</text>
+
+    <circle cx="640" cy="230" r="22" fill="rgba(8,145,178,0.2)" stroke="rgba(8,145,178,0.5)" stroke-width="1.5"/>
+    <text x="640" y="225" text-anchor="middle" fill="white" font-size="9" font-weight="700">Denial</text>
+    <text x="640" y="239" text-anchor="middle" fill="#67e8f9" font-size="9">Patterns</text>
+
+    <circle cx="640" cy="410" r="22" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.5)" stroke-width="1.5"/>
+    <text x="640" y="405" text-anchor="middle" fill="white" font-size="9" font-weight="700">Appeal</text>
+    <text x="640" y="419" text-anchor="middle" fill="#6ee7b7" font-size="9">Success</text>
+
+    <circle cx="420" cy="230" r="22" fill="rgba(8,145,178,0.2)" stroke="rgba(8,145,178,0.5)" stroke-width="1.5"/>
+    <text x="420" y="225" text-anchor="middle" fill="white" font-size="9" font-weight="700">Payer</text>
+    <text x="420" y="239" text-anchor="middle" fill="#67e8f9" font-size="9">Behavior</text>
+
+    <circle cx="420" cy="410" r="22" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.5)" stroke-width="1.5"/>
+    <text x="420" y="405" text-anchor="middle" fill="white" font-size="9" font-weight="700">Criteria</text>
+    <text x="420" y="419" text-anchor="middle" fill="#6ee7b7" font-size="9">Updates</text>
+
+    <!-- Bottom metrics -->
+    <rect x="100" y="572" width="200" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <text x="200" y="588" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="10">Input data sources</text>
+    <text x="200" y="600" text-anchor="middle" fill="white" font-size="12" font-weight="700">Every PA Outcome</text>
+
+    <rect x="330" y="572" width="200" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <text x="430" y="588" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="10">Network compounds via</text>
+    <text x="430" y="600" text-anchor="middle" fill="white" font-size="12" font-weight="700">Specialty Coverage</text>
+
+    <rect x="560" y="572" width="200" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <text x="660" y="588" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="10">Moat deepens with</text>
+    <text x="660" y="600" text-anchor="middle" fill="white" font-size="12" font-weight="700">Time + Volume</text>
+
+    <rect x="790" y="572" width="200" height="36" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <text x="890" y="588" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="10">Competitor disadvantage</text>
+    <text x="890" y="600" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="700">Cannot Be Purchased</text>
+
+  </svg>
+  </div>
+
+  <div class="card card-highlight" style="margin-top:10px;">
+    <h4 style="color:var(--cyan);">Why the Network Becomes Unassailable</h4>
+    <p style="margin-top:8px;">Each additional practice joining PriorIQ contributes new payer × drug × indication × outcome data combinations. The denial prediction model retrains on every correction. The appeal intelligence engine learns from every reversal. A competitor launching today would need 12–24 months of real-world PA volume to approach equivalent predictive accuracy — and by then, PriorIQ's dataset will be 2–3 years deeper and spanning multiple specialties.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<div class="footer">
+  <div><strong>PriorIQ Health</strong> — Series Seed Business Case &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; DRAFT — Confidential</div>
+  <div>Seed Round: $2–4M &nbsp;·&nbsp; Raising through Month 14 &nbsp;·&nbsp; <em>contact@prioriq.health</em></div>
+</div>
+
+</div>
+</body>
+</html>
